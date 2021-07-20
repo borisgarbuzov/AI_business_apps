@@ -55,3 +55,4 @@ par(mfrow=c(2,1))
 tsplot(x)
 tsplot(x, col=8, ylab=expression(hat(x)))
 lines(fitted(fit), col=2)
+

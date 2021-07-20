@@ -32,6 +32,9 @@ names(mySubtraction)
 
 # 2. Non-local
 # a. Backshift
+# k is opposite to the one of Python's shift operator
+# Also, in Python we lose values when shifting
+# Here, we just change the time.
 y = lag(x, k=-1)
 time(y)
 y[1]
@@ -49,7 +52,6 @@ time(higherOrderBackShiftedX)
 difX = diff(x)
 difX
 time(difX)
-# stopped here
 
 # Explicit lag
 # We do not need to put a minus here
@@ -207,13 +209,20 @@ par(mfrow=c(2,1))
 plot.ts(w, main="white noise")
 plot.ts(v, ylim=c(-3,3), main="moving average")
 
-# Stopped here
+# before
+lag(w, k= -1)
+as.ts(w)
+lag(w, k = 1)
 
+# after
 dfMatchedTime = ts.intersect(lag(w, k= -1), as.ts(w), lag(w, k = 1),
                              dframe = T)
 dim(dfMatchedTime)
+dfMatchedTime
 # First and last are dropped by intersect
 
+# Construct moving average with one back and one forward shift
+# out of that dataframe
 vConstructed = ts(data = 1/3 * rowSums(dfMatchedTime), start = 2)
 tsp(vConstructed)
 par(mfrow=c(2,1))
@@ -225,6 +234,8 @@ tsp(v)
 par(mfrow=c(1, 1))
 plot(v, type='l')
 lines(vConstructed, col='red')
+# So constructed and automatic coincided.
 
 myDif = v - vConstructed
 myDif
+

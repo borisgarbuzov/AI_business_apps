@@ -43,3 +43,4 @@ summary(fit <- lm(rec~soiL6, data=fish, na.action=NULL))
 par(mfrow=c(1, 1))
 tsplot(fish$rec, ylim=c(0,111))  # plot the data and the fitted values (not shown in text)
 lines(fitted(fit), col=2)
+

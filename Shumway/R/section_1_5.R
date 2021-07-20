@@ -9,6 +9,11 @@ if (suppressWarnings(!require("astsa"))) {
 
 # Example 1.25
 (r = round(acf(soi, 6, plot=FALSE)$acf[-1], 3)) # first 6 sample acf values
+class(r)
+typeof(r)
+dim(r)
+is.vector(r)
+length(r)
 par(mfrow=c(1,2))
 plot(lag(soi,-1), soi); legend('topleft', legend=r[1])
 plot(lag(soi,-6), soi); legend('topleft', legend=r[6])
@@ -18,10 +23,14 @@ set.seed(101010)
 x1 = 2*rbinom(11, 1, .5) - 1 # simulated sequence of coin tosses
 x2 = 2*rbinom(101, 1, .5) - 1
 y1 = 5 + filter(x1, sides=1, filter=c(1,-.7))[-1]
+unique(y1)
 y2 = 5 + filter(x2, sides=1, filter=c(1,-.7))[-1]
+unique(y2)
 tsplot(y1, type='s')  # plot series
 tsplot(y2, type='s')
 c(mean(y1), mean(y2))  # the sample means
+acf(y1, lag.max=4, plot=TRUE)
+acf(y2, lag.max=4, plot=TRUE)
 acf(y1, lag.max=4, plot=FALSE)
 acf(y2, lag.max=4, plot=FALSE)
 

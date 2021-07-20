@@ -10,6 +10,7 @@ if (suppressWarnings(!require("astsa"))) {
 # Example 1.1
 ## Note: tsplot is an astsa version 1.7.7+ script
 ## you can change tsplot to plot for an uglier graphic (here and below)
+## jj came from astsa
 
 tsplot(jj, type="o", ylab="Quarterly Earnings per Share")
 
@@ -26,10 +27,14 @@ tsplot(speech)
 ## library(TTR)
 ## djia  = getYahooData("^DJI", start=20060420, end=20160420, freq="daily")
 ############################################################################
+# djia comes from astsa,
+# but to work with it, you need xts
+
 if (suppressWarnings(!require("xts"))) {
   install.packages("xts")
   library(xts)
 }
+djia$Close
 djiar = diff(log(djia$Close))[-1]         # approximate returns
 plot(djiar, main="DJIA Returns", type="n")
 lines(djiar)
@@ -40,6 +45,8 @@ tsplot(soi, ylab="", main="Southern Oscillation Index")
 tsplot(rec, ylab="", main="Recruitment")
 
 # Example 1.6
+# ts.plot is standard. Plot several time series in the same axes.
+#
 par(mfrow=c(2,1), mar=c(3,2,1,0)+.5, mgp=c(1.6,.6,0))
 ts.plot(fmri1[,2:5], col=1:4, ylab="BOLD", xlab="", main="Cortex")
 ts.plot(fmri1[,6:9], col=1:4, ylab="BOLD", xlab="", main="Thalamus & Cerebellum")
@@ -47,5 +54,7 @@ mtext("Time (1 pt = 2 sec)", side=1, line=2)
 
 # Example 1.7
 par(mfrow=c(2,1))
+# tsplot is from astsa
+# it wraps up the regular plot.
 tsplot(EQ5, main="Earthquake")
 tsplot(EXP6, main="Explosion")

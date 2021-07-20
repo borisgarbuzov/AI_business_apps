@@ -1,12 +1,18 @@
 rm(list = ls())
 
 # set.seed(1) # set seed to reproduce results below
-x <- rnorm(50)
-y <- 1*x + rnorm(50)
+sampleSize = 50
+x <- rnorm(sampleSize)
+y <- 1*x + rnorm(sampleSize)
+par(mfrow=c(2,1))
+plot(x)
+plot(y)
 fit <- lm(y ~ x) # fit linear model
 
 # we can get summary for our model (residuals, coefficients, R-squared, etc.)
 summary(fit)
+
+
 
 # get all properties that we can extract from the fit object
 names(fit)
@@ -31,6 +37,10 @@ plot(fit) # extract all 4 plots
 
 # exclude intercept from our model by adding 0
 fitWithoutIntercept <- lm(y ~ 0 + x)
+fitWithoutIntercept <- lm(y ~ x -1)
+
+fitWithtercept <- lm(y ~ x + 1)
+fitWithtercept <- lm(y ~ x)
 
 fitData <- lm(mpg ~ cyl, data = mtcars)
 summary(fitData)
